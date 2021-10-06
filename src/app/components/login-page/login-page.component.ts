@@ -14,7 +14,7 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      nickname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+      nickname: ['', [Validators.required, Validators.pattern('^\\w+$')]],
     });
   }
 

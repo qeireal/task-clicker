@@ -10,7 +10,6 @@ import {switchMap} from 'rxjs/operators';
 
 import {LeaderboardComponent} from './components/leaderboard/leaderboard.component';
 import {LoginPageComponent} from './components/login-page/login-page.component';
-import {Worker} from './models/worker';
 import {ApiService} from './services/api.service';
 import {ClickService} from './services/click.service';
 import {WorkersService} from './services/workers.service';

@@ -1,18 +1,18 @@
 <button
 	class="shop-button nes-btn"
 	type="button"
-	[disabled]="this.worker.price > wallet"
-	[class.is-disabled]="this.worker.price > wallet"
+	[disabled]="isDisabled"
+	[class.is-disabled]="isDisabled"
 	(click)="handleClick()">
 
 	<img
-		[src]="this.worker.imageUrl"
-		[alt]="this.worker.name"
+		[src]="worker.imageUrl"
+		[alt]="worker.name"
 		class="shop-button-icon">
 
 	<div class="shop-button-info">
-		<h4>{{ this.worker.name }}</h4>
-		<p>Price: {{ this.worker.price }}</p>
-		<p>Velocity: {{ this.worker.performance }}</p>
+		<h4>{{ worker.name }}</h4>
+		<p>Price: {{ worker.price }}</p>
+		<p>Velocity: {{ worker.performance }}</p>
 	</div>
 </button>

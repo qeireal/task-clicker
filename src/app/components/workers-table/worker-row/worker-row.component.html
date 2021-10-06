@@ -1,8 +1,8 @@
 <div class="worker-image-container">
 	<img
 		*ngFor="let n of fakeArray | async; trackBy:trackById"
-		[src]="this.workerModel?.imageUrl"
-		[alt]="this.workerModel?.name"
+		[src]="workerModel?.imageUrl"
+		[alt]="workerModel?.name"
 		class="worker-image">
 </div>
 

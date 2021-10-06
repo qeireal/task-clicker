@@ -1,4 +1,3 @@
-import {registerLocaleData} from '@angular/common';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, interval, Observable} from 'rxjs';
 import {startWith, switchMap} from 'rxjs/operators';

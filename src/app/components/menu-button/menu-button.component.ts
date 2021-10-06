@@ -7,8 +7,6 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuButtonComponent {
-  showDialog = false;
-
   @Output()
   onClick = new EventEmitter<number>();
 

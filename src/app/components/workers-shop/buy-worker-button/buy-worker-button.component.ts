@@ -1,8 +1,7 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 
 import {Worker} from '../../../models/worker';
 import {ApiService} from '../../../services/api.service';
-import {ClickService} from '../../../services/click.service';
 import {WorkersService} from '../../../services/workers.service';
 
 @Component({
@@ -24,6 +23,10 @@ export class BuyWorkerButtonComponent {
 
   @Input()
   wallet!: number;
+
+  get isDisabled(): boolean {
+    return this.worker.price > this.wallet;
+  }
 
   handleClick() {
     if (this.isLoading) {
