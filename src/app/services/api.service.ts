@@ -11,7 +11,7 @@ import {LeaderboardRow} from '../models/leaderboard-row';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://cors-anywhere.herokuapp.com/http://wrikeclicker-env.eba-hjperrpi.eu-north-1.elasticbeanstalk.com/api';
+  private apiUrl = 'http://wrikeclicker-env.eba-hjperrpi.eu-north-1.elasticbeanstalk.com/api';
   private nickname = '';
 
   constructor(private http: HttpClient){ };
