@@ -1,5 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "schematics": {
+    "@schematics/angular": {
+      "component": {
+        "changeDetection": "OnPush"
+      }
+    }
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -27,11 +34,14 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "less",
             "assets": [
+              "src/assets/favicons/favicon.ico",
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.less"
+              "src/custom-theme.scss",
+              "src/styles.less",
+              "node_modules/nes.css/css/nes.css"
             ],
             "scripts": []
           },
@@ -40,7 +50,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "800kb",
                   "maximumError": "1mb"
                 },
                 {
@@ -95,6 +105,7 @@
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "less",
             "assets": [
+              "src/assets/favicons/favicon.ico",
               "src/favicon.ico",
               "src/assets"
             ],
@@ -103,6 +114,10 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }

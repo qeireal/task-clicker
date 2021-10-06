@@ -1,0 +1,34 @@
+@import "../../../styles.less";
+
+:host {
+	padding: 10px 20px;
+	background: @background-clouds;
+	background-color: @background-color-lite;
+	background-size: 128px;
+	display: flex;
+	height: 100%;
+}
+
+.nes-container {
+	background-color: rgba(255, 255, 255, 0.4);
+}
+
+.side-menu-buttons-list {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+}
+
+.menu-container > .title {
+	background-image: linear-gradient(@background-color-lite, rgb(255, 255, 255));
+}
+
+.menu-button {
+	display: flex;
+	align-items: center;
+}
+
+.menu-button-text {
+	margin-left: 15px;
+}

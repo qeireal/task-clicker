@@ -1,0 +1,32 @@
+<div class="nes-container with-title">
+	<p
+		class="title">
+		Leaderboard
+	</p>
+
+	<div mat-dialog-content class="nes-table-responsive">
+		<table class="nes-table is-bordered is-centered">
+			<thead>
+				<tr>
+					<th>Nickname</th>
+					<th>Overall tasks</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let stat of leaderboardStats">
+
+					<td>{{stat.nickname}}</td>
+					<td>{{stat.score}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div mat-dialog-actions align="end">
+		<button
+			mat-button
+			mat-dialog-close
+			class="nes-btn">
+			Close
+		</button>
+	</div>
+</div>

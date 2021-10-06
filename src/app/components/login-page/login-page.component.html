@@ -1,0 +1,38 @@
+<div class="nes-container with-title">
+	<p
+		class="title">
+		Welcome to the Wrike Task Clicker!
+	</p>
+		<form [formGroup]="form">
+			<input
+				type="text"
+				class="nes-input"
+				[class.is-error]="isInvalid"
+				required
+				formControlName="nickname"
+				placeholder="Write your name"
+				aria-placeholder="Write your name">
+
+
+
+			<div
+				mat-dialog-actions
+				class="dialog-actions"
+				[class.dialog-actions-with-text]="isInvalid">
+
+				<div *ngIf="isInvalid" class="error-text">
+					Please enter a nickname without special symbols
+				</div>
+
+				<button
+					mat-button
+					[mat-dialog-close]="form.get('nickname')?.value"
+					[disabled]="isInvalid"
+					[class.is-disabled]="isInvalid"
+					cdkFocusInitial
+					class="nes-btn">
+					Log-in
+				</button>
+			</div>
+		</form>
+</div>

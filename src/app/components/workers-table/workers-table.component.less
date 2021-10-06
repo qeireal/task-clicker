@@ -1,0 +1,29 @@
+@import "../../../styles.less";
+
+:host {
+	padding: 10px 20px 30px 20px;
+	border: 30px solid transparent;
+	border-bottom: none;
+	border-image: @border-interior;
+	background: @background-tile;
+	background-size: 64px;
+}
+
+.office-container {
+	height: 100%;
+}
+
+.workers-list {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+}
+
+.with-title > .title {
+	background-color: @background-color;
+}
+
+.worker-card:not(:last-child) {
+	border-bottom: black solid;
+}

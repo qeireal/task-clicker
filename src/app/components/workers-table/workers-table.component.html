@@ -1,0 +1,14 @@
+<div class="nes-container with-title office-container">
+	<p
+		class="title">
+		Your company
+	</p>
+
+	<div class="workers-list">
+		<worker-row
+			*ngFor="let purchasedIndex of purchasedIndexes | async"
+			[index]="purchasedIndex"
+			class="worker-card">
+		</worker-row>
+	</div>
+</div>

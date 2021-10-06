@@ -1,0 +1,9 @@
+<div class="worker-image-container">
+	<img
+		*ngFor="let n of fakeArray | async; trackBy:trackById"
+		[src]="this.workerModel?.imageUrl"
+		[alt]="this.workerModel?.name"
+		class="worker-image">
+</div>
+
+<p class="worker-counter">x{{ counter | async }}</p>

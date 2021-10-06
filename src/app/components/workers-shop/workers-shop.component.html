@@ -1,0 +1,15 @@
+<div class="shop-container nes-container with-title">
+	<p
+		class="title shop-title">
+		Labour Market
+	</p>
+
+	<div class="shop-list">
+		<buy-worker-button
+			*ngFor="let worker of this.workersList; trackBy:trackById"
+			[worker]="worker"
+			[wallet]="(walletState | async)!"
+			(onBuy)="handleBuy($event)">
+		</buy-worker-button>
+	</div>
+</div>

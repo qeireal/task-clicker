@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@background-color: #7C9CC0;
+@background-color-lite: #9bb4d1;
+@background-tile: url(./assets/floor.png) round;
+@background-clouds: url(./assets/clouds.png) round;
+@border-interior: url(./assets/interior.jpg) 10% stretch;
+
+html, body {
+	height: 100%;
+	background: @background-clouds;
+	background-color: @background-color;
+	background-size: 128px;
+}
+
+body {
+	margin: 0;
+}

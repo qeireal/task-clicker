@@ -1,0 +1,43 @@
+@import "../../../styles.less";
+
+:host {
+	border: 1px solid black;
+	padding: 10px 20px;
+	background: @background-tile;
+	background-size: 64px;
+}
+
+.task-button-container {
+	height: 100%;
+}
+
+.task-button-container > .title {
+	background-color: @background-color;
+}
+
+.task-button-wrapper {
+	width: 100%;
+	height: calc(100% - 24px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.task-button {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.task-button:hover {
+	filter: drop-shadow( 5px 4px 2px rgba(0, 0, 0, .7));
+}
+
+.task-button:active {
+	filter: drop-shadow( 7px 7px 4px rgba(0, 0, 0, .7));
+}
+
+.task-button-text {
+	margin-top: 10px;
+}
