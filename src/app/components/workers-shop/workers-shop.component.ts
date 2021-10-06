@@ -15,7 +15,6 @@ import {WorkersService} from '../../services/workers.service';
 })
 export class WorkersShopComponent {
   constructor(
-    private apiService: ApiService,
     private workersService: WorkersService,
     private clickService: ClickService,
   ) { }
@@ -30,9 +29,5 @@ export class WorkersShopComponent {
 
   trackById(index: number) {
     return index;
-  }
-
-  handleBuy(index: number): void {
-    this.apiService.buyWorker(index).subscribe(_ => this.workersService.buyWorker(index));
   }
 }

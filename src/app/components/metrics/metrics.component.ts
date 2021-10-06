@@ -25,8 +25,4 @@ export class MetricsComponent {
   get velocity(): Observable<NonNullable<number>> {
     return this.clickService.accumulatorState;
   }
-
-  get sprints(): Observable<NonNullable<number>> {
-    return this.clickService.workStream;
-  }
 }

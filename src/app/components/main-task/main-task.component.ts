@@ -15,6 +15,6 @@ export class MainTaskComponent {
   ) { }
 
   handleClick(): void {
-    this.clickService.addClicks(10);
+    this.clickService.addClicks();
   }
 }

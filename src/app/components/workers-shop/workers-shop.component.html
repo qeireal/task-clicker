@@ -8,8 +8,7 @@
 		<buy-worker-button
 			*ngFor="let worker of this.workersList; trackBy:trackById"
 			[worker]="worker"
-			[wallet]="(walletState | async)!"
-			(onBuy)="handleBuy($event)">
+			[wallet]="(walletState | async)!">
 		</buy-worker-button>
 	</div>
 </div>

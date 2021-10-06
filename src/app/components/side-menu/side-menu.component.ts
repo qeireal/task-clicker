@@ -15,6 +15,6 @@ export class SideMenuComponent {
   }
 
   logout(): void {
-    console.log('logout');
+    window.location.reload();
   }
 }

@@ -22,6 +22,17 @@ export class ClickService {
   ) {};
 
   init(data: InitialData): void {
+    const companyPerformace = data.currentWorkers.map(
+      currentWorkersRow => {
+        const currentWorkerInfo = data.workersInfo.find(workerInfo => workerInfo.id === currentWorkersRow.workerId);
+
+        return currentWorkersRow.workerCount * (currentWorkerInfo?.performance ?? 0);
+      }
+    )
+    .reduce((a, b) => a + b, 0);
+
+    this.accumulatorState.next(companyPerformace);
+
     this.walletState.next(data.wallet);
     this.overallState.next(data.overallTasks);
 
@@ -31,14 +42,17 @@ export class ClickService {
     )
     .subscribe(() => {
       this.manualClicks = 0;
-      this.addClicks(this.accumulatorState.value);
+      this.addClicks(this.accumulatorState.value, false);
     });
   }
 
-  addClicks(numberOfClicks: number = 1): void {
+  addClicks(numberOfClicks = 1, isManual = true): void {
     this.walletState.next(this.walletState.value + numberOfClicks)
     this.overallState.next(this.overallState.value + numberOfClicks)
-    this.manualClicks += numberOfClicks;
+
+    if (isManual) {
+      this.manualClicks += numberOfClicks;
+    }
   }
 
   buySome(workerToBuy: Worker): void {
