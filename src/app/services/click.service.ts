@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, interval, Observable} from 'rxjs';
-import {startWith, switchMap} from 'rxjs/operators';
+import {skip, startWith, switchMap} from 'rxjs/operators';
 
 import {InitialData} from '../models/initial-data';
 import {Worker} from '../models/worker';
@@ -35,8 +35,11 @@ export class ClickService {
     this.walletState.next(data.wallet);
     this.overallState.next(data.overallTasks);
 
-    this.workStream = interval(10000).pipe(startWith(0));
+    this.workStream = interval(10000).pipe(
+      startWith(0),
+    );
     this.workStream.pipe(
+      skip(1),
       switchMap(_ => this.apiService.sendCompletedTasks(this.manualClicks))
     )
     .subscribe(() => {

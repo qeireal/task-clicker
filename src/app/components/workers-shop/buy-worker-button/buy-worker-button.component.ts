@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 
 import {Worker} from '../../../models/worker';
 import {ApiService} from '../../../services/api.service';
+import {ClickService} from '../../../services/click.service';
 import {WorkersService} from '../../../services/workers.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class BuyWorkerButtonComponent {
   constructor(
     private apiService: ApiService,
     private workersService: WorkersService,
+    private clickService: ClickService,
   ) { }
 
   @Input()
@@ -35,7 +37,7 @@ export class BuyWorkerButtonComponent {
 
     this.isLoading = true;
 
-    this.apiService.buyWorker(this.worker.id).subscribe(_ => {
+    this.apiService.buyWorker(this.worker.id, this.clickService.manualClicks).subscribe(_ => {
       this.workersService.buyWorker(this.worker.id)
       this.isLoading = false;
     });

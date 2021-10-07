@@ -27,13 +27,14 @@ export class ApiService {
     );
   }
 
-  buyWorker(workerId: number): Observable<void> {
+  buyWorker(workerId: number, manualClicks: number): Observable<void> {
     return this.http.get<void>(
       `${this.apiUrl}/buy-worker`,
       {
         params: {
           nickname: this.nickname,
-          workerId: workerId
+          workerId: workerId,
+          completedTasks: manualClicks,
         }
       }
     );
