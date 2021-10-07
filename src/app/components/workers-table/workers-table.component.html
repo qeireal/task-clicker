@@ -4,7 +4,18 @@
 		Your company
 	</p>
 
-	<div class="workers-list">
+	<div
+		*ngIf="isCompanyEmpty"
+		class="office-empty-message">
+
+
+		<p>You are working alone for now.</p>
+	</div>
+
+	<div
+		*ngIf="!isCompanyEmpty"
+		class="workers-list">
+
 		<worker-row
 			*ngFor="let purchasedIndex of purchasedIndexes | async"
 			[index]="purchasedIndex"

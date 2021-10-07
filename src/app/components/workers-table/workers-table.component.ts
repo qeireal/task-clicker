@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 import {WorkersService} from '../../services/workers.service';
 
@@ -16,6 +17,12 @@ export class WorkersTableComponent {
 
   get purchasedIndexes(): Observable<ReadonlyArray<number>> {
     return this.workersService.getPurchasedIndexes();
+  }
+
+  get isCompanyEmpty(): Observable<boolean> {
+    return this.purchasedIndexes.pipe(
+      map(indexes => indexes.length > 0)
+    );
   }
 
   trackById(index: number) {
