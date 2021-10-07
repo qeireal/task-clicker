@@ -21,7 +21,7 @@ export class WorkersTableComponent {
 
   get isCompanyEmpty(): Observable<boolean> {
     return this.purchasedIndexes.pipe(
-      map(indexes => indexes.length > 0)
+      map(indexes => indexes.length === 0)
     );
   }
 
