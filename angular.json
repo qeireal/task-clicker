@@ -41,7 +41,7 @@
             "styles": [
               "src/custom-theme.scss",
               "src/styles.less",
-              "node_modules/nes.css/css/nes.css"
+              "node_modules/nes.css/css/nes.min.css"
             ],
             "scripts": []
           },
