@@ -1,7 +1,9 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 
+import {Upgrade} from '../../models/upgrade';
 import {ClickService} from '../../services/click.service';
+import {UpgradesService} from '../../services/upgrades.service';
 
 @Component({
   selector: 'metrics',
@@ -12,6 +14,7 @@ import {ClickService} from '../../services/click.service';
 export class MetricsComponent {
   constructor(
     private clickService: ClickService,
+    private upgradesService: UpgradesService,
   ) { }
 
   get overallCounter(): Observable<NonNullable<number>> {
@@ -24,5 +27,9 @@ export class MetricsComponent {
 
   get velocity(): Observable<NonNullable<number>> {
     return this.clickService.accumulatorState;
+  }
+
+  get currentUpgrade(): Observable<Upgrade> {
+    return this.upgradesService.currectUpgrade;
   }
 }

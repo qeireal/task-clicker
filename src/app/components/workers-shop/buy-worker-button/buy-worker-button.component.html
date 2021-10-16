@@ -6,13 +6,13 @@
 	(click)="handleClick()">
 
 	<img
-		[src]="worker.imageUrl"
-		[alt]="worker.name"
+		[src]="entity.imageUrl"
+		[alt]="entity.name"
 		class="shop-button-icon">
 
 	<div class="shop-button-info">
-		<h4>{{ worker.name }}</h4>
-		<p>Price: {{ worker.price }}</p>
-		<p>Velocity: {{ worker.performance }}</p>
+		<h4>{{ entity.name }}</h4>
+		<p>Price: {{ entity.price }}</p>
+		<p>Velocity: {{ entity.performance }}</p>
 	</div>
 </button>

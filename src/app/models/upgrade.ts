@@ -1,4 +1,4 @@
-export class Worker {
+export class Upgrade {
 	id: number;
 	name: string;
 	performance: number;
@@ -17,11 +17,11 @@ export class Worker {
 		this.performance = performance;
 		this.price = price;
 
-		this.imageUrl = `${window.location.href}assets/${this.imgMap[this.id]}.gif`;
+		this.imageUrl = `${window.location.href}assets/upgrades/${this.id - 1}.png`;
 	}
 
-	static fromJson(json: Worker) {
-		return new Worker(
+	static fromJson(json: Upgrade) {
+		return new Upgrade(
 			json['id'],
 			json['name'],
 			json['performance'],
@@ -29,13 +29,7 @@ export class Worker {
 		);
 	}
 
-	private imgMap: {[key: number]: string} = {
-		1: 'intern',
-		2: 'junior',
-		3: 'middle',
-		4: 'senior',
-		5: 'team-lead',
-		6: 'outsource',
-		7: 'office',
+	toString() {
+		return `${this.name} (${this.performance} per click)`
 	}
 }

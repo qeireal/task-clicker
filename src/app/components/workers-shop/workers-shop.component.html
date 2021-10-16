@@ -1,14 +1,51 @@
 <div class="shop-container nes-container with-title">
 	<p
 		class="title shop-title">
-		Labour Market
+		Upgrades
 	</p>
 
+	<form class="shop-tabs">
+		<label>
+			<input
+				type="radio"
+				class="nes-radio"
+				[name]="employees"
+				[value]="employees"
+				[(ngModel)]="pageSelected"/>
+
+			<span>{{employees}}</span>
+		</label>
+
+		<label>
+			<input
+				type="radio"
+				class="nes-radio"
+				[name]="yourself"
+				[value]="yourself"
+				[(ngModel)]="pageSelected"/>
+
+			<span>{{yourself}}</span>
+		</label>
+	</form>
+
 	<div class="shop-list">
-		<buy-worker-button
-			*ngFor="let worker of workersList; trackBy:trackById"
-			[worker]="worker"
-			[wallet]="(walletState | async)!">
-		</buy-worker-button>
+
+		<ng-container
+			*ngIf="pageSelected === employees; else selfUpgrades">
+
+			<buy-worker-button
+				*ngFor="let worker of workersList; trackBy:trackById"
+				[entity]="worker"
+				[wallet]="(walletState | async)!">
+			</buy-worker-button>
+		</ng-container>
+
+		<ng-template #selfUpgrades>
+			<buy-worker-button
+				*ngFor="let upgrade of upgradesList; trackBy:trackById"
+				[entity]="upgrade"
+				[wallet]="(walletState | async)!">
+			</buy-worker-button>
+		</ng-template>
 	</div>
 </div>

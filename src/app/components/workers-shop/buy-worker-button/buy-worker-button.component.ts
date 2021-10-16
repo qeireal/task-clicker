@@ -1,8 +1,10 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 
+import {Upgrade} from '../../../models/upgrade';
 import {Worker} from '../../../models/worker';
 import {ApiService} from '../../../services/api.service';
 import {ClickService} from '../../../services/click.service';
+import {UpgradesService} from '../../../services/upgrades.service';
 import {WorkersService} from '../../../services/workers.service';
 
 @Component({
@@ -18,16 +20,20 @@ export class BuyWorkerButtonComponent {
     private apiService: ApiService,
     private workersService: WorkersService,
     private clickService: ClickService,
+    private upgradeService: UpgradesService,
   ) { }
 
   @Input()
-  worker!: Worker;
+  entity!: Worker | Upgrade;
 
   @Input()
   wallet!: number;
 
+  @Input()
+  isWorker!: boolean;
+
   get isDisabled(): boolean {
-    return this.worker.price > this.wallet;
+    return this.entity.price > this.wallet;
   }
 
   handleClick() {
@@ -37,8 +43,17 @@ export class BuyWorkerButtonComponent {
 
     this.isLoading = true;
 
-    this.apiService.buyWorker(this.worker.id, this.clickService.manualClicks).subscribe(_ => {
-      this.workersService.buyWorker(this.worker.id)
+    if (this.isWorker) {
+      this.apiService.buyWorker(this.entity.id, this.clickService.manualClicks).subscribe(_ => {
+        this.workersService.buyWorker(this.entity.id)
+        this.isLoading = false;
+      });
+
+      return;
+    }
+
+    this.apiService.buyUpgrade(this.entity.id, this.clickService.manualClicks).subscribe(_ => {
+      this.upgradeService.buyUpgrade(this.entity.id)
       this.isLoading = false;
     });
   }

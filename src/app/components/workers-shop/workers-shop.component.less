@@ -12,8 +12,17 @@
 	height: 100%;
 }
 
+.shop-tabs {
+	display: flex;
+	width: 100%;
+
+	label + label {
+		margin-left: 50px;
+	}
+}
+
 .shop-list {
-	height: 100%;
+	height: calc(100% - 24px);
 	display: flex;
 	flex-direction: column;
 	overflow: auto;

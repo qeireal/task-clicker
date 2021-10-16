@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 import {InitialData} from '../models/initial-data';
+import {Upgrade} from '../models/upgrade';
 import {Worker} from '../models/worker';
 import {ClickService} from './click.service';
 
@@ -11,6 +12,12 @@ import {ClickService} from './click.service';
 })
 export class WorkersService {
   workersList!: ReadonlyArray<Worker>;
+  upgradesList: ReadonlyArray<Upgrade> = [
+    new Upgrade(2, 'Junior', 3, 200),
+    new Upgrade(3, 'Middle', 10, 1000),
+    new Upgrade(4, 'Senior', 35, 5000),
+    new Upgrade(5, 'Tech lead', 150, 20000),
+  ];
   mapCounter!: BehaviorSubject<Map<number,number>>;
 
   constructor(

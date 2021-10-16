@@ -3,6 +3,7 @@ import {BehaviorSubject, interval, Observable} from 'rxjs';
 import {skip, startWith, switchMap} from 'rxjs/operators';
 
 import {InitialData} from '../models/initial-data';
+import {Upgrade} from '../models/upgrade';
 import {Worker} from '../models/worker';
 import {ApiService} from './api.service';
 
@@ -15,6 +16,7 @@ export class ClickService {
   accumulatorState = new BehaviorSubject<number>(0);
   manualClicks = 0;
   workStream!: Observable<number>;
+  clickValue = 1;
 
   constructor(
     private apiService: ApiService,
@@ -48,17 +50,21 @@ export class ClickService {
     });
   }
 
-  addClicks(numberOfClicks = 1, isManual = true): void {
+  addClicks(numberOfClicks = this.clickValue, isManual = true): void {
     this.walletState.next(this.walletState.value + numberOfClicks)
     this.overallState.next(this.overallState.value + numberOfClicks)
 
     if (isManual) {
-      this.manualClicks += numberOfClicks;
+      this.manualClicks += 1;
     }
   }
 
   buySome(workerToBuy: Worker): void {
     this.walletState.next(this.walletState.value - workerToBuy.price);
     this.accumulatorState.next(this.accumulatorState.value + workerToBuy.performance);
+  }
+
+  buyUpgrade(upgradeToBuy: Upgrade): void {
+    this.clickValue = upgradeToBuy.performance;
   }
 }

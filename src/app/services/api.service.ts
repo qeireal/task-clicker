@@ -40,6 +40,19 @@ export class ApiService {
     );
   }
 
+  buyUpgrade(upgradeId: number, manualClicks: number): Observable<void> {
+    return this.http.get<void>(
+      `${this.apiUrl}/buy-upgrade`,
+      {
+        params: {
+          nickname: this.nickname,
+          workerId: upgradeId,
+          completedTasks: manualClicks,
+        }
+      }
+    );
+  }
+
   sendCompletedTasks(completedTasks: number): Observable<void> {
     return this.http.get<void>(
       `${this.apiUrl}/send-completed-tasks`,

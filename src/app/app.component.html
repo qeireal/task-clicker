@@ -9,7 +9,7 @@
       [opened]="isSidenavOpened"
       class="sidenav">
 
-      <side-menu (onOpenLeaderboard)="handleOpenLeaderboard()"></side-menu>
+      <side-menu (onDialog)="handleOpenDialog($event)"></side-menu>
     </mat-sidenav>
 
     <mat-sidenav-content class="container">

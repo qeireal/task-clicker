@@ -20,6 +20,11 @@
 	height: 100%;
 }
 
+.side-menu-buttons-block {
+	display: flex;
+	flex-direction: column;
+}
+
 .menu-container > .title {
 	background-image: linear-gradient(@background-color-lite, rgb(255, 255, 255));
 }
@@ -27,6 +32,10 @@
 .menu-button {
 	display: flex;
 	align-items: center;
+}
+
+.menu-button + .menu-button {
+	margin-top: 20px;
 }
 
 .menu-button-text {

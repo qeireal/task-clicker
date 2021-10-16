@@ -5,22 +5,44 @@
 	</p>
 
 	<div class="side-menu-buttons-list">
-		<button
-			type="button"
-			class="nes-btn menu-button"
-			(click)="openLeaderboard()">
+		<div class="side-menu-buttons-block">
+			<button
+				type="button"
+				class="nes-btn menu-button"
+				(click)="openLeaderboard()">
 
-			<i class="nes-icon trophy"></i>
-			<div class="menu-button-text">Leaderboard</div>
-		</button>
+				<i class="nes-icon trophy"></i>
+				<div class="menu-button-text">Leaderboard</div>
+			</button>
 
-		<button
-			type="button"
-			class="nes-btn menu-button"
-			(click)="logout()">
+			<button
+				type="button"
+				class="nes-btn menu-button"
+				(click)="openRules()">
 
-			<i class="nes-icon close"></i>
-			<div class="menu-button-text">Logout</div>
-		</button>
+				<i class="nes-icon coin"></i>
+				<div class="menu-button-text">Rules</div>
+			</button>
+		</div>
+
+		<div class="side-menu-buttons-block">
+			<button
+				type="button"
+				class="nes-btn menu-button"
+				(click)="openCreadits()">
+
+				<i class="nes-icon heart"></i>
+				<div class="menu-button-text">Credits</div>
+			</button>
+
+			<button
+				type="button"
+				class="nes-btn menu-button"
+				(click)="logout()">
+
+				<i class="nes-icon close"></i>
+				<div class="menu-button-text">Logout</div>
+			</button>
+		</div>
 	</div>
 </div>

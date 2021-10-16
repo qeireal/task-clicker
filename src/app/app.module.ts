@@ -8,11 +8,13 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
+import {CreditsPageComponent} from './components/credits-page/credits-page.component';
 import {LeaderboardComponent} from './components/leaderboard/leaderboard.component';
 import {LoginPageComponent} from './components/login-page/login-page.component';
 import {MainTaskComponent} from './components/main-task/main-task.component';
 import {MenuButtonComponent} from './components/menu-button/menu-button.component';
 import {MetricsComponent} from './components/metrics/metrics.component';
+import {RulesPageComponent} from './components/rules-page/rules-page.component';
 import {SideMenuComponent} from './components/side-menu/side-menu.component';
 import {BuyWorkerButtonComponent} from './components/workers-shop/buy-worker-button/buy-worker-button.component';
 import {WorkersShopComponent} from './components/workers-shop/workers-shop.component';
@@ -32,9 +34,12 @@ import {WorkersTableComponent} from './components/workers-table/workers-table.co
     SideMenuComponent,
     LeaderboardComponent,
     LoginPageComponent,
+    RulesPageComponent,
+    CreditsPageComponent,
   ],
   imports: [
     ReactiveFormsModule,
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
