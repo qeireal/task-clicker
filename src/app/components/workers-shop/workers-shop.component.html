@@ -42,7 +42,7 @@
 
 		<ng-template #selfUpgrades>
 			<buy-worker-button
-				*ngFor="let upgrade of upgradesList; trackBy:trackById"
+				*ngFor="let upgrade of upgradesList | async; trackBy:trackById"
 				[entity]="upgrade"
 				[wallet]="(walletState | async)!">
 			</buy-worker-button>

@@ -7,6 +7,7 @@ import {Upgrade} from '../../models/upgrade';
 import {Worker} from '../../models/worker';
 import {ApiService} from '../../services/api.service';
 import {ClickService} from '../../services/click.service';
+import {UpgradesService} from '../../services/upgrades.service';
 import {WorkersService} from '../../services/workers.service';
 
 @Component({
@@ -23,6 +24,7 @@ export class WorkersShopComponent {
 
   constructor(
     private workersService: WorkersService,
+    private upgradesService: UpgradesService,
     private clickService: ClickService,
   ) { }
 
@@ -30,8 +32,8 @@ export class WorkersShopComponent {
     return this.workersService.workersList;
   }
 
-  get upgradesList(): ReadonlyArray<Upgrade> {
-    return this.workersService.upgradesList;
+  get upgradesList(): Observable<ReadonlyArray<Upgrade>> {
+    return this.upgradesService.upgradesToPurchase;
   }
 
   get walletState(): Observable<number> {

@@ -15,6 +15,7 @@ import {RulesPageComponent} from './components/rules-page/rules-page.component';
 import {DialogType} from './models/dialog-type';
 import {ApiService} from './services/api.service';
 import {ClickService} from './services/click.service';
+import {UpgradesService} from './services/upgrades.service';
 import {WorkersService} from './services/workers.service';
 
 @Component({
@@ -41,6 +42,7 @@ export class AppComponent implements OnInit {
     private apiService: ApiService,
     private clickService: ClickService,
     private workersService: WorkersService,
+    private upgradesService: UpgradesService,
   ) {};
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class AppComponent implements OnInit {
           this.dialog.open(RulesPageComponent);
           this.clickService.init(result);
           this.workersService.init(result);
+          this.upgradesService.init(result);
 
           this.appInited = true;
           this.cdr.markForCheck();

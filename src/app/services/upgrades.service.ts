@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 import {InitialData} from '../models/initial-data';
 import {Upgrade} from '../models/upgrade';
@@ -9,26 +10,25 @@ import {ClickService} from './click.service';
   providedIn: 'root'
 })
 export class UpgradesService {
-  upgradesList: ReadonlyArray<Upgrade> = [
-    new Upgrade(2, 'Junior', 3, 200),
-    new Upgrade(3, 'Middle', 10, 1000),
-    new Upgrade(4, 'Senior', 35, 5000),
-    new Upgrade(5, 'Tech lead', 150, 20000),
-  ];
-
-  currectUpgrade = new BehaviorSubject<Upgrade>(new Upgrade(1, 'Intern', 1, 0));
+  upgradesList!: ReadonlyArray<Upgrade>;
+  currectUpgrade!: BehaviorSubject<Upgrade>;
 
   constructor(
     private clickService: ClickService,
   ) { }
 
+  get upgradesToPurchase(): Observable<ReadonlyArray<Upgrade>> {
+    return this.currectUpgrade.pipe(
+      map(currectUpgrade => this.upgradesList.filter(upgrade => upgrade.id > currectUpgrade.id))
+    );
+  }
+
   init(data: InitialData) {
-    // this.workersList = data.workersInfo.map(Worker.fromJson);
-    // const currentWorkers = data.currentWorkers;
-    // this.mapCounter = new BehaviorSubject(new Map(this.workersList.map(i => [
-    //   i.id,
-    //   currentWorkers.find(currentWorker => currentWorker.workerId === i.id)?.workerCount ?? 0,
-    // ])));
+    this.upgradesList = data.upgradesInfo.map(Upgrade.fromJson);
+    const currentUpgrade = this.upgradesList.find((upgrade) => upgrade.id === data.currentUpgradeId) ?? this.upgradesList[0];
+
+    this.clickService.buyUpgrade(currentUpgrade);
+    this.currectUpgrade = new BehaviorSubject(currentUpgrade);
   }
 
   buyUpgrade(upgradeIndex: number): void {

@@ -46,7 +46,7 @@ export class ApiService {
       {
         params: {
           nickname: this.nickname,
-          workerId: upgradeId,
+          upgradeId: upgradeId,
           completedTasks: manualClicks,
         }
       }
