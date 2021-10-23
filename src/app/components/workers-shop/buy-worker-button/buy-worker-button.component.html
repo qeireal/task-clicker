@@ -7,12 +7,12 @@
 
 	<img
 		[src]="entity.imageUrl"
-		[alt]="entity.name"
+		[alt]="isDisabled ? '???' : entity.name"
 		class="shop-button-icon">
 
 	<div class="shop-button-info">
-		<h4>{{ entity.name }}</h4>
+		<h4>{{ isDisabled ? '???' : entity.name }}</h4>
 		<p>Price: {{ entity.price }}</p>
-		<p>Velocity: {{ entity.performance }}</p>
+		<p>Velocity: {{ isDisabled ? '???' : entity.performance }}</p>
 	</div>
 </button>
