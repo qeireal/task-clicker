@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, interval, Observable} from 'rxjs';
+import {BehaviorSubject, interval, Observable, ReplaySubject} from 'rxjs';
 import {skip, startWith, switchMap} from 'rxjs/operators';
 
+import {ExpiredWorkers} from '../models/expired-workers';
 import {InitialData} from '../models/initial-data';
 import {Upgrade} from '../models/upgrade';
 import {Worker} from '../models/worker';
@@ -14,6 +15,7 @@ export class ClickService {
   walletState = new BehaviorSubject<number>(0);
   overallState = new BehaviorSubject<number>(0);
   accumulatorState = new BehaviorSubject<number>(0);
+  expiredWorkers = new ReplaySubject<ReadonlyArray<ExpiredWorkers>>(1);
   manualClicks = 0;
   workStream!: Observable<number>;
   clickValue = 1;
@@ -41,7 +43,8 @@ export class ClickService {
       skip(1),
       switchMap(_ => this.apiService.sendCompletedTasks(this.manualClicks))
     )
-    .subscribe(() => {
+    .subscribe((response) => {
+      this.expiredWorkers.next(response.data)
       this.manualClicks = 0;
       this.addClicks(this.accumulatorState.value, false);
     });

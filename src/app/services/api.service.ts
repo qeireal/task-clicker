@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 import {DataResponse} from '../models/data-response';
+import {ExpiredWorkers} from '../models/expired-workers';
 import {InitialData} from '../models/initial-data';
 import {LeaderboardRow} from '../models/leaderboard-row';
 
@@ -53,8 +54,8 @@ export class ApiService {
     );
   }
 
-  sendCompletedTasks(completedTasks: number): Observable<void> {
-    return this.http.get<void>(
+  sendCompletedTasks(completedTasks: number): Observable<DataResponse<ReadonlyArray<ExpiredWorkers>>> {
+    return this.http.get<DataResponse<ReadonlyArray<ExpiredWorkers>>>(
       `${this.apiUrl}/send-completed-tasks`,
       {
         params: {

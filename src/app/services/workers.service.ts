@@ -11,8 +11,10 @@ import {ClickService} from './click.service';
   providedIn: 'root'
 })
 export class WorkersService {
+  static workersLifetime = 60000;
+
   workersList!: ReadonlyArray<Worker>;
-  currentWorkers!: BehaviorSubject<Array<CurrentWorkersState>>;
+  currentWorkers!: BehaviorSubject<ReadonlyArray<CurrentWorkersState>>;
   mapCounter!: Observable<Map<number,number>>;
 
   constructor(
@@ -21,7 +23,7 @@ export class WorkersService {
 
   init(data: InitialData) {
     this.workersList = data.workersInfo.map(Worker.fromJson);
-    this.currentWorkers = new BehaviorSubject(data.currentWorkers.map(CurrentWorkersState.fromJson));
+    this.currentWorkers = new BehaviorSubject(data.currentWorkers);
     this.mapCounter = this.currentWorkers.pipe(
       map(currentWorkers => {
         const countMap = new Map(this.workersList.map(i => [i.id, 0]));
@@ -32,6 +34,19 @@ export class WorkersService {
         return countMap;
       })
     );
+
+    this.clickService.expiredWorkers.subscribe((expiredWorkers) => {
+      let updatedList = this.currentWorkers.value;
+
+      expiredWorkers?.forEach((expiredWorker) => {
+        updatedList = updatedList.filter((state) =>
+          state.workerId !== expiredWorker.workerId ||
+          state.workerEndTime !== expiredWorker.endTime
+        );
+      });
+
+      this.currentWorkers.next(updatedList);
+    })
   }
 
   buyWorker(workerIndex: number): void {
@@ -41,7 +56,15 @@ export class WorkersService {
       return;
     }
 
-    this.currentWorkers.next([...this.currentWorkers.value, new CurrentWorkersState(workerIndex, new Date())]);
+    this.currentWorkers.next([
+      ...this.currentWorkers.value,
+      {
+        id: 1,
+        workerId: workerIndex,
+        workerEndTime: new Date((new Date()).getTime() + WorkersService.workersLifetime),
+        progressValue: 100,
+      },
+    ]);
     this.clickService.buySome(workerToBuy);
   }
 
