@@ -36,7 +36,8 @@
 			<buy-worker-button
 				*ngFor="let worker of workersList; trackBy:trackById"
 				[entity]="worker"
-				[wallet]="(walletState | async)!">
+				[wallet]="(walletState | async)!"
+				[isWorker]="true">
 			</buy-worker-button>
 		</ng-container>
 
@@ -44,7 +45,8 @@
 			<buy-worker-button
 				*ngFor="let upgrade of upgradesList | async; trackBy:trackById"
 				[entity]="upgrade"
-				[wallet]="(walletState | async)!">
+				[wallet]="(walletState | async)!"
+				[isWorker]="false">
 			</buy-worker-button>
 		</ng-template>
 	</div>

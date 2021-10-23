@@ -23,17 +23,14 @@ export class ClickService {
   ) {};
 
   init(data: InitialData): void {
-    const companyPerformace = data.currentWorkers.map(
-      currentWorkersRow => {
-        const currentWorkerInfo = data.workersInfo.find(workerInfo => workerInfo.id === currentWorkersRow.workerId);
+    const companyPerformace = data.currentWorkers
+      .reduce((prev, current) => {
+        const currentWorkerInfo = data.workersInfo.find(workerInfo => workerInfo.id === current.workerId);
 
-        return currentWorkersRow.workerCount * (currentWorkerInfo?.performance ?? 0);
-      }
-    )
-    .reduce((a, b) => a + b, 0);
+        return prev + (currentWorkerInfo?.performance ?? 0);
+      }, 0);
 
     this.accumulatorState.next(companyPerformace);
-
     this.walletState.next(data.wallet);
     this.overallState.next(data.overallTasks);
 

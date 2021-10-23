@@ -1,9 +1,16 @@
-<div class="worker-image-container">
-	<img
-		*ngFor="let n of fakeArray | async; trackBy:trackById"
-		[src]="workerModel?.imageUrl"
-		[alt]="workerModel?.name"
-		class="worker-image">
+<div class="worker-units">
+	<div class="worker-image-container"
+		*ngFor="let worker of workers; trackBy:trackById">
+
+		<img
+			[src]="workerModel?.imageUrl"
+			[alt]="workerModel?.name"
+			class="worker-image">
+
+		<progress id="health" class="health-bar" [value]="worker.progressValue" max="100"></progress>
+	</div>
+
 </div>
 
-<p class="worker-counter">x{{ counter | async }}</p>
+
+<p class="worker-counter">x{{ workers.length }}</p>

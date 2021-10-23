@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 
+import {CurrentWorkersState} from '../../../models/current-workers-state';
 import {Worker} from '../../../models/worker';
 import {WorkersService} from '../../../services/workers.service';
 
@@ -13,7 +13,7 @@ import {WorkersService} from '../../../services/workers.service';
 })
 export class WorkerRowComponent implements OnInit {
   @Input()
-  index = 0;
+  workers!: ReadonlyArray<CurrentWorkersState>;
 
   counter!: Observable<number>;
   workerModel!: Worker | undefined;
@@ -23,14 +23,7 @@ export class WorkerRowComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.counter = this.workersService.getCountById(this.index);
-    this.workerModel = this.workersService.getWorkerById(this.index);
-  }
-
-  get fakeArray(): Observable<Array<void>> {
-    return this.counter.pipe(
-      map((num) => Array(num > 10 ? 10 : num))
-    );
+    this.workerModel = this.workersService.getWorkerById(this.workers[0]?.workerId);
   }
 
   trackById(index: number) {

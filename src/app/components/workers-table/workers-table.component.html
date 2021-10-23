@@ -16,8 +16,8 @@
 			class="workers-list">
 
 			<worker-row
-				*ngFor="let purchasedIndex of purchasedIndexes | async"
-				[index]="purchasedIndex"
+				*ngFor="let currentWorkers of currentWorkersLists | async"
+				[workers]="currentWorkers"
 				class="worker-card">
 			</worker-row>
 		</div>

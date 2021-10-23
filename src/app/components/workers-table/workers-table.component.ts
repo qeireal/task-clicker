@@ -1,7 +1,8 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, withLatestFrom} from 'rxjs/operators';
 
+import {CurrentWorkersState} from '../../models/current-workers-state';
 import {WorkersService} from '../../services/workers.service';
 
 @Component({
@@ -15,13 +16,26 @@ export class WorkersTableComponent {
     private workersService: WorkersService,
   ) {}
 
-  get purchasedIndexes(): Observable<ReadonlyArray<number>> {
-    return this.workersService.getPurchasedIndexes();
+  get currentWorkersLists(): Observable<ReadonlyArray<ReadonlyArray<CurrentWorkersState>>> {
+    return this.workersService.mapCounter.pipe(
+      withLatestFrom(this.workersService.currentWorkers),
+      map(([mapCounter, currectWorkersState]) => {
+        const resultList = <Array<ReadonlyArray<CurrentWorkersState>>>[];
+
+        mapCounter.forEach((count, id) => {
+          if (count > 0) {
+            resultList.push(currectWorkersState.filter(worker => worker.workerId === id))
+          }
+        });
+
+        return resultList;
+      })
+    );
   }
 
   get isCompanyEmpty(): Observable<boolean> {
-    return this.purchasedIndexes.pipe(
-      map(indexes => indexes.length === 0)
+    return this.workersService.currentWorkers.pipe(
+      map(workers => workers.length === 0)
     );
   }
 
