@@ -67,4 +67,8 @@ export class ClickService {
   buyUpgrade(upgradeToBuy: Upgrade): void {
     this.clickValue = upgradeToBuy.performance;
   }
+
+  updateAccumulatorValue(changeValue: number) {
+    this.accumulatorState.next(this.accumulatorState.value + changeValue);
+  }
 }

@@ -4,6 +4,7 @@ import {map} from 'rxjs/operators';
 
 import {CurrentWorkersState} from '../models/current-workers-state';
 import {InitialData} from '../models/initial-data';
+import {NewWorkerState} from '../models/new-worker-state';
 import {Worker} from '../models/worker';
 import {ClickService} from './click.service';
 
@@ -39,18 +40,30 @@ export class WorkersService {
       let updatedList = this.currentWorkers.value;
 
       expiredWorkers?.forEach((expiredWorker) => {
-        updatedList = updatedList.filter((state) =>
-          state.workerId !== expiredWorker.workerId ||
-          state.workerEndTime !== expiredWorker.endTime
-        );
+        let deletedPerformance = 0;
+
+        updatedList = updatedList.filter((state) => {
+          if (
+            state.workerId !== expiredWorker.workerId ||
+            state.id !== expiredWorker.id
+          ) {
+            return true;
+          }
+
+          deletedPerformance -= this.getWorkerById(state.workerId)?.performance ?? 0;
+
+          return false;
+        });
+
+        this.clickService.updateAccumulatorValue(deletedPerformance);
       });
 
       this.currentWorkers.next(updatedList);
     })
   }
 
-  buyWorker(workerIndex: number): void {
-    const workerToBuy = this.getWorkerById(workerIndex);
+  buyWorker(newWorker: NewWorkerState): void {
+    const workerToBuy = this.getWorkerById(newWorker.workerId);
 
     if (!workerToBuy) {
       return;
@@ -59,9 +72,9 @@ export class WorkersService {
     this.currentWorkers.next([
       ...this.currentWorkers.value,
       {
-        id: 1,
-        workerId: workerIndex,
-        workerEndTime: new Date((new Date()).getTime() + WorkersService.workersLifetime),
+        id: newWorker.id,
+        workerId: newWorker.workerId,
+        workerEndTime: new Date(newWorker.endTime),
         progressValue: 100,
       },
     ]);

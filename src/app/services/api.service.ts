@@ -3,10 +3,12 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
+import {CurrentWorkersState} from '../models/current-workers-state';
 import {DataResponse} from '../models/data-response';
 import {ExpiredWorkers} from '../models/expired-workers';
 import {InitialData} from '../models/initial-data';
 import {LeaderboardRow} from '../models/leaderboard-row';
+import {NewWorkerState} from '../models/new-worker-state';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +30,8 @@ export class ApiService {
     );
   }
 
-  buyWorker(workerId: number, manualClicks: number): Observable<void> {
-    return this.http.get<void>(
+  buyWorker(workerId: number, manualClicks: number): Observable<DataResponse<NewWorkerState>> {
+    return this.http.get<DataResponse<NewWorkerState>>(
       `${this.apiUrl}/buy-worker`,
       {
         params: {

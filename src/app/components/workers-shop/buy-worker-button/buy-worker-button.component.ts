@@ -44,8 +44,8 @@ export class BuyWorkerButtonComponent {
     this.isLoading = true;
 
     if (this.isWorker) {
-      this.apiService.buyWorker(this.entity.id, this.clickService.manualClicks).subscribe(_ => {
-        this.workersService.buyWorker(this.entity.id)
+      this.apiService.buyWorker(this.entity.id, this.clickService.manualClicks).subscribe(newWorker => {
+        this.workersService.buyWorker(newWorker.data);
         this.isLoading = false;
       });
 
